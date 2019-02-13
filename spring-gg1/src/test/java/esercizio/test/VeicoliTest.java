@@ -80,5 +80,4 @@ public class VeicoliTest {
 		v2.vai(7);
 		v3.vai(7);
 	}
-
 }
