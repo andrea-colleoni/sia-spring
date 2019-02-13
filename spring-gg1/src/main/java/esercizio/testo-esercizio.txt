@@ -1,0 +1,18 @@
+Interfaccia Veicolo
+- vai(int ore) => syso 'ho percorso xx km' ... 'consumando benzina/gasolio' 
+- velocita: int (km/h)
+
+Tre implementazioni
+- Biciletta
+- Automobile
+- Autocarro
+
+Automobile e autocarro hanno bisogno anche di motore.
+Interfaccua Motore
+Due implementazioni
+- Benzina
+- Diesel
+
+Programma:
+Chiede al contesto tre istanze di veicoli (prototipati) e gli fa percorrere un po' di strada.
+
