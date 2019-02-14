@@ -19,7 +19,7 @@ public class DispatcherConfig extends AbstractAnnotationConfigDispatcherServletI
 	// URL: http://nomeserver:porta/   => /nomeapplicazione/   => /risorse che ci sono nella nostra web app/   => /comandi mvc, contenuti, pagine, ecc.
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/mvc/" };
+		return new String[] { "/mvc/*" };
 	}
 
 }
