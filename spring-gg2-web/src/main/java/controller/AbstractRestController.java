@@ -33,6 +33,7 @@ public class AbstractRestController<T, PK extends Serializable> {
 			ps.save(t, key);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -46,6 +47,7 @@ public class AbstractRestController<T, PK extends Serializable> {
 			ps.save(t, key);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -58,6 +60,7 @@ public class AbstractRestController<T, PK extends Serializable> {
 			}
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
