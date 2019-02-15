@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 import model.Persona;
 
-@Service
-public class PersonaManager {
+public class PersonaManagerEsempio {
 
 	public String pubblica;
 	String membroDefault;

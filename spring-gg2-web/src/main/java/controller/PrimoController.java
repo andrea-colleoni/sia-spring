@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import business.PersonaManager;
+import business.PersonaManagerEsempio;
 import model.Persona;
-
-@Controller
+// @Controller // rimosso perché era solo il primo esempio, che poi è stato completato in PersonaController
+// volevo evitare problemi di doppio mapping dovuti ai casi di esempio
 public class PrimoController {
 	
 	@Autowired
-	private PersonaManager pm;
+	private PersonaManagerEsempio pm;
 	
 	// solo view
 	@RequestMapping(value="/hello", method=RequestMethod.POST)

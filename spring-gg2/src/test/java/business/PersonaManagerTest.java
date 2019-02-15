@@ -25,7 +25,7 @@ import model.Persona;
 public class PersonaManagerTest {
 	
 	@Autowired
-	private PersonaManager pm;
+	private PersonaManagerEsempio pm;
 	
 	@Autowired
 	@Qualifier("db1")
