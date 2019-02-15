@@ -25,6 +25,8 @@ public class PersonaServiceTest {
 
 	@Autowired
 	private PersonaService ps;
+	
+	private String testCF = "test";
 
 	@Test
 	public void testAll() {
@@ -35,14 +37,14 @@ public class PersonaServiceTest {
 	@Test
 	public void testByKey() {
 		Persona p = new Persona();
-		p.setCodiceFiscale("test");
+		p.setCodiceFiscale(testCF);
 		p.setNome("Test");
-		ps.save(p);
+		ps.save(p, testCF);
 
 		Persona db = ps.byKey("test");
 		assertEquals(p, db);
 
-		ps.delete(p);
+		ps.delete(p, testCF);
 	}
 
 	@Test
@@ -51,7 +53,7 @@ public class PersonaServiceTest {
 			Persona p = new Persona();
 			p.setCodiceFiscale("test");
 			p.setNome("Test");
-			ps.save(p);
+			ps.save(p, testCF);
 		} catch (Exception e) {
 			fail("si è verificata un'eccezione");
 		}
@@ -62,9 +64,9 @@ public class PersonaServiceTest {
 		Persona p = new Persona();
 		p.setCodiceFiscale("test");
 		p.setNome("Test");
-		ps.save(p);
+		ps.save(p, testCF);
 		try {
-			ps.delete(p);
+			ps.delete(p, testCF);
 		} catch (Exception e) {
 			fail("si è verificata un'eccezione");
 		}

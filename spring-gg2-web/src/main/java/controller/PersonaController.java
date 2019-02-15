@@ -24,7 +24,7 @@ public class PersonaController {
 	private PersonaService ps;
 
 	@RequestMapping(value = "/persone", method = RequestMethod.GET)
-	public @ResponseBody List<Persona> all(@RequestParam("term") String serachTerm) {
+	public @ResponseBody List<Persona> all(@RequestParam(name = "term", required = false) String serachTerm) {
 		if (serachTerm == null) {
 			return ps.all();
 		} else {
@@ -43,9 +43,9 @@ public class PersonaController {
 			Persona db = ps.byKey(codiceFiscale);
 			if (db != null && !p.getCodiceFiscale().equals(codiceFiscale)) { // cambia il cod fisc, quindi elimino il
 																				// vecchio
-				ps.delete(db);
+				ps.delete(db, codiceFiscale);
 			}
-			ps.save(p);
+			ps.save(p, codiceFiscale);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -59,7 +59,7 @@ public class PersonaController {
 			if (db != null) {
 				return false;
 			}
-			ps.save(p);
+			ps.save(p, codiceFiscale);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -71,7 +71,7 @@ public class PersonaController {
 		try {
 			Persona db = ps.byKey(codiceFiscale);
 			if (db != null) {
-				ps.delete(db);
+				ps.delete(db, codiceFiscale);
 			}
 			return true;
 		} catch (Exception e) {

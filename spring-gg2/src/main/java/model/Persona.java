@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -15,7 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-//@Table(name = "persone")
 @NamedQueries(value = { 
 		@NamedQuery(name = "persona.all", query = "select p from Persona p"),
 		@NamedQuery(name = "persona.searchByName", query = "select p from Persona p where p.nome = :name ")
@@ -23,12 +21,9 @@ import javax.persistence.OneToMany;
 public class Persona {
 
 	@Id
-	//@Column(name = "codfisc")
 	private String codiceFiscale;
-	@Column(nullable = false)
 	@Basic(fetch=FetchType.LAZY)
 	private String nome;
-	// @Lob @Basic(fetch=FetchType.EAGER)
 	private String cognome;
 	
 	@OneToMany(mappedBy="persona",cascade= {CascadeType.PERSIST}, fetch=FetchType.EAGER)
