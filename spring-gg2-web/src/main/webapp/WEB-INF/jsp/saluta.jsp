@@ -16,5 +16,6 @@
 			<li>${p.nome} ${p.cognome}</li>
 		</c:forEach>
 	</ul>
+<h1>${ inesistente }</h1>
 </body>
 </html>

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@Import(Config.class)
+@Import(BusinessConfig.class)
 @EnableWebMvc
 @ComponentScan(basePackages = { "controller" })
 public class WebConfig implements WebMvcConfigurer {

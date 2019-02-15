@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Elenco persone</title>
+</head>
+<body>
+	<h1>Elenco persone</h1>
+
+	<ul id="ulPersone"></ul>
+	
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script>
+		$(() => {
+			$.ajax({
+				url: 'mvc/personeJSON',
+				method: 'get'
+			})
+			.done((persone) => {
+				persone.forEach(p => {
+					$('#ulPersone').append(`<li>${p.nome} ${p.cognome}</li>`);
+				});
+			})
+		});
+	</script>
+</body>
+</html>
