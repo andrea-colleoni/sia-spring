@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -17,59 +18,84 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @Configuration
 @ComponentScan(basePackages = { "business" })
 public class BusinessConfig {
-	
 
-//	public EntityManagerFactory entityManagerFactory() {
-//		return Persistence.createEntityManagerFactory("gg2-spring");
-//	}
-	
-//	@Bean
-//	@Scope("singleton") // default
-//	public EntityManagerFactory entityManagerFactory2() {
-//		return Persistence.createEntityManagerFactory("gg2-spring2");
-//	}
+	@Bean(name="db1")
+	@Scope("prototype")
+	@Profile("test")
+	public EntityManager entityManagerTest() {
+		return entityManagerFactoryTest().getObject().createEntityManager();
+	}
 	
 	@Bean(name="db1")
 	@Scope("prototype")
-	public EntityManager entityManager() {
-		return entityManagerFactory().getObject().createEntityManager();
+	@Profile("produzione")
+	public EntityManager entityManagerProduzione() {
+		return entityManagerFactoryProd().getObject().createEntityManager();
 	}
-	
-//	@Bean(name="db2")
-//	@Scope("prototype")
-//	public EntityManager entityManager2() {
-//		return entityManagerFactory2().createEntityManager();
-//	}
 	
 	@Bean
 	@Scope("singleton") // default
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	@Profile("test")
+	public LocalContainerEntityManagerFactoryBean entityManagerFactoryTest() {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-		emf.setDataSource(dataSource());
+		emf.setDataSource(dataSourceDerby());
 		emf.setPackagesToScan(new String[] { "model" });
 		
 		JpaVendorAdapter jva = new HibernateJpaVendorAdapter();
 		emf.setJpaVendorAdapter(jva);
 		
-		emf.setJpaProperties(additionalProperties());
+		emf.setJpaProperties(additionalPropertiesDerby());
 		return emf;
 	}
 	
 	@Bean
-	public DataSource dataSource() {
+	@Scope("singleton") // default
+	@Profile("produzione")
+	public LocalContainerEntityManagerFactoryBean entityManagerFactoryProd() {
+		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+		emf.setDataSource(dataSourceMySql());
+		emf.setPackagesToScan(new String[] { "model" });
+		
+		JpaVendorAdapter jva = new HibernateJpaVendorAdapter();
+		emf.setJpaVendorAdapter(jva);
+		
+		emf.setJpaProperties(additionalPropertiesMySql());
+		return emf;
+	}
+	
+	
+	@Bean
+	@Profile("test")
+	public DataSource dataSourceDerby() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("org.apache.derby.jdbc.EmbeddedDriver");
 		ds.setUrl("jdbc:derby:C:\\Users\\andre\\git\\sia-spring\\spring-gg2\\corsospring;create=true");
-//		ds.setUsername(username);
-//		ds.setPassword(password);
 		return ds;
 	}
 	
-	Properties additionalProperties() {
+	@Bean
+	@Profile("produzione")
+	public DataSource dataSourceMySql() {
+		DriverManagerDataSource ds = new DriverManagerDataSource();
+		ds.setDriverClassName("org.mariadb.jdbc.Driver");
+		ds.setUrl("jdbc:mariadb://localhost:3306/corsojpa");
+		ds.setUsername("root");		
+		return ds;
+	}
+	
+	Properties additionalPropertiesDerby() {
 		Properties props = new Properties();
 		props.setProperty("javax.persistence.schema-generation.database.action", "create");
 		props.setProperty("hibernate.show_sql", "true");
 		props.setProperty("hibernate.dialect", "org.hibernate.dialect.DerbyDialect");
+		return props;
+	}
+	
+	Properties additionalPropertiesMySql() {
+		Properties props = new Properties();
+		props.setProperty("javax.persistence.schema-generation.database.action", "create");
+		props.setProperty("hibernate.show_sql", "true");
+		props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		return props;
 	}
 

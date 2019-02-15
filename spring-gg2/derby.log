@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Fri Feb 15 16:32:55 CET 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0168-f1ca-01b2-00000c0fdd78 
-on database directory C:\Users\andre\git\sia-spring\spring-gg2\corsospring with class loader sun.misc.Launcher$AppClassLoader@2f92e0f4 
+Fri Feb 15 16:45:35 CET 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0168-f1d5-9d35-00000bfb9e38 
+on database directory C:\Users\andre\git\sia-spring\spring-gg2\corsospring with class loader sun.misc.Launcher$AppClassLoader@5305068a 
 Loaded from file:/C:/Users/andre/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_191-b12
